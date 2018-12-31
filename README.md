@@ -11,4 +11,4 @@ selenium : download by "pip install selenium"
 
 BeautifulSoup : download by "pip install bs4"
 
-WARNING : Instagram [robots.txt](www.instagram.com/robots.txt) disallow crawling, so this bot is quite slow for giving less pressure on server.
+WARNING : Instagram [robots.txt](https://www.instagram.com/robots.txt) disallow crawling, so this bot is quite slow for giving less pressure on server.
