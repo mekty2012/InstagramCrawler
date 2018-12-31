@@ -57,6 +57,7 @@ if __name__ == '__main__':
       sleep(1)
       items = find(BeautifulSoup(driver.page_source, "html.parser"))
       print(len(items))
+      url_part = driver.current_url.replace("/", "").replace("https:www.instagram.com", "")
       for item in items:
         try:
 
@@ -68,7 +69,10 @@ if __name__ == '__main__':
           while True:
             response = requests.get(url)
             if str(response) != "<Response [200]>": continue
-            Image.open(BytesIO(response.content)).save(foldername + "%d_%d.jpg"%(i, j))
+            if os.path.isfile(account_name + '/' + "%s_%d.jpg"%(url_part, j)):
+              print("File already exists, so it stops here.")
+              exit()
+            Image.open(BytesIO(response.content)).save(foldername + "%s_%d.jpg"%(url_part, j))
             print("%d_%d.jpg downloaded"%(i, j))
             break
 
