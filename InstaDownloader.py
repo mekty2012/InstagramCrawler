@@ -8,7 +8,7 @@ import sys
 import os
 
 if len(sys.argv) == 1:
-  print("Usage : python InstaDownloader.py 'url'\nEx)python InstaDownloader.py https://www.instagram.com/p/BrQNqCBgzpy/")
+  print("Usage : python InstaDownloader.py 'url'\nEx)python InstaDownloader.py https://www.instagram.com/p/BrQNqCBgzpy/\nOption\n-h : turn on with headless chrome")
   exit()
 
 def find(_soup):
@@ -27,7 +27,14 @@ def find(_soup):
 
 url = sys.argv[1]
 
-driver = webdriver.Chrome('chromedriver_win32/chromedriver.exe')
+options = webdriver.ChromeOptions()
+options.add_argument('headless')
+options.add_argument('window-size=1200x600')
+
+if "-h" in sys.argv:
+  driver = webdriver.Chrome('chromedriver_win32/chromedriver.exe', chrome_options = options)
+else:
+  driver = webdriver.Chrome('chromedriver_win32/chromedriver.exe')
 
 driver.get(url)
 driver.implicitly_wait(3)
