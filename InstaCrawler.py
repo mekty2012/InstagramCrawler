@@ -8,7 +8,7 @@ import os
 import sys
 
 if len(sys.argv) == 1:
-  print("usage : python InstaCrawler.py \"account_name\"\nEx) python InstaCrawler.py aimin_official")
+  print("usage : python InstaCrawler.py \"account_name\"\nEx) python InstaCrawler.py aimin_official\nOption\n-h : turn on with headless chrome")
   exit()
 
 account_name = sys.argv[1]
@@ -37,7 +37,15 @@ def find(soup_a):
   return items
 
 if __name__ == '__main__':
-  driver = webdriver.Chrome('chromedriver_win32/chromedriver.exe')
+  
+  options = webdriver.ChromeOptions()
+  options.add_argument('headless')
+  options.add_argument('window-size=1200x600')
+
+  if "-h" in sys.argv:
+    driver = webdriver.Chrome('chromedriver_win32/chromedriver.exe', chrome_options = options)
+  else:
+    driver = webdriver.Chrome('chromedriver_win32/chromedriver.exe')
 
   driver.get("https://www.instagram.com/" + account_name + "/")
   driver.implicitly_wait(3)
